@@ -2,24 +2,48 @@ import VideoPlayer from '../../src/components/VideoPlayer.js';
 import VideoList from '../../src/components/VideoList.js';
 import exampleVideoData from '../../src/data/exampleVideoData.js';
 
-var App = () => (
-  <div>
-    <nav className="navbar">
-      <div className="col-md-6 offset-md-3">
-        <div><h5><em>search</em> view goes here</h5></div>
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      allVideos: exampleVideoData,
+      currVideoPlaying: exampleVideoData[0] 
+    };
+  }
+  playVideo () {
+    this.setState(state => ({
+      // state.currVideoPlaying : //VideoList.
+    }));
+  }
+ // when you click on something with class "video-list-entry-title"
+   // store its innerText property
+   // for each item in exampleVideoData
+     // if exampleVideoData[i].snippet.title === innerText
+       // setState for this.state.currVideoPlaying
+
+  render() {
+
+    return (
+      <div>
+        <nav className="navbar">
+          <div className="col-md-6 offset-md-3">
+            <div><h5><em>WHAT DO YOU WANT?</em></h5></div>
+          </div>
+        </nav>
+        <div className="row">
+          <div className="col-md-7">
+            <div><h5><em>THIS VIDEO IS PLAYING</em><VideoPlayer video={this.state.currVideoPlaying} /></h5></div>
+          </div>
+          <div className="col-md-5">
+            <div><h5><em>THESE ARE YOUR VIDEOS</em><VideoList videos={exampleVideoData} onClick={this.playVideo}/></h5></div>
+          </div>
+        </div>
       </div>
-    </nav>
-    <div className="row">
-      <div className="col-md-7">
-        <div><h5><em>THIS VIDEO IS PLAYING</em><VideoPlayer video={exampleVideoData[0]} /></h5></div>
-      </div>
-      <div className="col-md-5">
-        <div><h5><em>THESE ARE YOUR VIDEOS</em><VideoList videos={exampleVideoData}/></h5></div>
-      </div>
-    </div>
-  </div>
-);
+    );
+  }  
+}
 
 // In the ES6 spec, files are "modules" and do not share a top-level scope
 // `var` declarations will only exist globally where explicitly defined
 export default App;
+// onClick = {this.onVideoListClick.bind(this)}
