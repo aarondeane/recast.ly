@@ -1,14 +1,16 @@
 import exampleVideoData from '../data/exampleVideoData.js';
+import VideoListEntry from '../components/VideoListEntry.js';
 
-var VideoList = (props) => (
-  <div className="video-list">
-    <div><h5><em>videoListEntry</em>{props.videos[0].snippet.title}</h5></div>
-    {/* <div><h5><em>videoListEntry</em>{props.videos[1].snippet.title}</h5></div>
+var VideoList = (props) => {
+  console.log(VideoListEntry);
+  return (<div className="video-list">
+    {/* <div><h5><em>videoListEntry</em><VideoListEntry greg={exampleVideoData}/></h5></div> */}
+    <div><h5><em>videoListEntry</em>{props.videos[1].snippet.title}</h5></div>
     <div><h5><em>videoListEntry</em> {props.videos[2].snippet.title}</h5></div>
     <div><h5><em>videoListEntry</em> {props.videos[3].snippet.title}</h5></div>
-    <div><h5><em>videoListEntry</em> {props.videos[4].snippet.title}</h5></div> */}
-  </div>
-);
+    <div><h5><em>videoListEntry</em> {props.videos[4].snippet.title}</h5></div>
+  </div>);
+};
 
 // PropTypes tell other developers what `props` a component expects
 // Warnings will be shown in the console when the defined rules are violated
