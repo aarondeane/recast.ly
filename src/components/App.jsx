@@ -1,3 +1,4 @@
+import VideoPlayer from '../../src/components/VideoPlayer.js';
 import VideoList from '../../src/components/VideoList.js';
 import exampleVideoData from '../../src/data/exampleVideoData.js';
 
@@ -10,7 +11,7 @@ var App = () => (
     </nav>
     <div className="row">
       <div className="col-md-7">
-        <div><h5><em>videoPlayer</em> view goes here</h5></div>
+        <div><h5><em>THIS VIDEO IS PLAYING</em><VideoPlayer video={exampleVideoData[0]} /></h5></div>
       </div>
       <div className="col-md-5">
         <div><h5><em>THESE ARE YOUR VIDEOS</em><VideoList videos={exampleVideoData}/></h5></div>
