@@ -6,20 +6,22 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      allVideos: exampleVideoData,
-      currVideoPlaying: exampleVideoData[0] 
+      currVideoPlaying: exampleVideoData[0]
     };
+    this.playVideo = this.playVideo.bind(this);
   }
-  playVideo () {
-    this.setState(state => ({
-      // state.currVideoPlaying : //VideoList.
-    }));
+
+  playVideo (title, videos) {
+    var videoIndex;
+    videos.forEach(function(video, i) {
+      if (video.snippet.title === title) {
+        videoIndex = i;
+      }
+    });
+    this.setState({
+      currVideoPlaying: videos[videoIndex]
+    });
   }
- // when you click on something with class "video-list-entry-title"
-   // store its innerText property
-   // for each item in exampleVideoData
-     // if exampleVideoData[i].snippet.title === innerText
-       // setState for this.state.currVideoPlaying
 
   render() {
 
@@ -35,7 +37,7 @@ class App extends React.Component {
             <div><h5><em>THIS VIDEO IS PLAYING</em><VideoPlayer video={this.state.currVideoPlaying} /></h5></div>
           </div>
           <div className="col-md-5">
-            <div><h5><em>THESE ARE YOUR VIDEOS</em><VideoList videos={exampleVideoData} onClick={this.playVideo}/></h5></div>
+            <div><h5><em>THESE ARE YOUR VIDEOS</em><VideoList videos={exampleVideoData} playVideo={this.playVideo}/></h5></div>
           </div>
         </div>
       </div>
