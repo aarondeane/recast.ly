@@ -15,20 +15,19 @@ class App extends React.Component {
     this.playVideo = this.playVideo.bind(this);
   }
 
-  playVideo (title, videos) {
-    var videoIndex;
-    videos.forEach(function(video, i) {
-      if (video.snippet.title === title) {
-        videoIndex = i;
-      }
-    });
+  playVideo (title, video) {
+    // var videoIndex;
+    // videos.forEach(function(video, i) {
+    //   if (video.snippet.title === title) {
+    //     videoIndex = i;
+    //   }
+    // });
     this.setState({
-      currVideoPlaying: videos[videoIndex]
+      currVideoPlaying: video
     });
   }
 
   componentDidMount () {
-    debugger;
     // this.setState((state,props) => ({
     //   currVideoPlaying: props.searchYouTube({query: 'ugly cats', max: 1, key: YOUTUBE_API_KEY}, function(vid) {return vid;})
     // }));
