@@ -1,10 +1,14 @@
 import VideoPlayer from '../../src/components/VideoPlayer.js';
 import VideoList from '../../src/components/VideoList.js';
 import exampleVideoData from '../../src/data/exampleVideoData.js';
+import YOUTUBE_API_KEY from '../../src/config/youtube.js';
+
+// props.searchYouTube({query: 'ugly cats', max: 1, key: YOUTUBE_API_KEY}, function(vid) {return vid;})
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       currVideoPlaying: exampleVideoData[0]
     };
@@ -22,6 +26,8 @@ class App extends React.Component {
       currVideoPlaying: videos[videoIndex]
     });
   }
+
+  componentDidMount
 
   render() {
 
