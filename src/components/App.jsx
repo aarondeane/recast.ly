@@ -8,9 +8,9 @@ import YOUTUBE_API_KEY from '../../src/config/youtube.js';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
-      currVideoPlaying: exampleVideoData[0]
+      currVideoPlaying: exampleVideoData[0],
+      currVideoList: exampleVideoData
     };
     this.playVideo = this.playVideo.bind(this);
   }
@@ -27,7 +27,18 @@ class App extends React.Component {
     });
   }
 
-  componentDidMount
+  componentDidMount () {
+    debugger;
+    // this.setState((state,props) => ({
+    //   currVideoPlaying: props.searchYouTube({query: 'ugly cats', max: 1, key: YOUTUBE_API_KEY}, function(vid) {return vid;})
+    // }));
+    this.props.searchYouTube({query: 'ugly cats', max: 5, key: YOUTUBE_API_KEY}, (videos) => {
+      this.setState({
+        currVideoPlaying: videos[0],
+        currVideoList: videos
+      });
+    });
+  }
 
   render() {
 
@@ -43,7 +54,7 @@ class App extends React.Component {
             <div><h5><em>THIS VIDEO IS PLAYING</em><VideoPlayer video={this.state.currVideoPlaying} /></h5></div>
           </div>
           <div className="col-md-5">
-            <div><h5><em>THESE ARE YOUR VIDEOS</em><VideoList videos={exampleVideoData} playVideo={this.playVideo}/></h5></div>
+            <div><h5><em>THESE ARE YOUR VIDEOS</em><VideoList videos={this.state.currVideoList} playVideo={this.playVideo}/></h5></div>
           </div>
         </div>
       </div>
