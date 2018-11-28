@@ -2,8 +2,7 @@ import VideoPlayer from '../../src/components/VideoPlayer.js';
 import VideoList from '../../src/components/VideoList.js';
 import exampleVideoData from '../../src/data/exampleVideoData.js';
 import YOUTUBE_API_KEY from '../../src/config/youtube.js';
-
-// props.searchYouTube({query: 'ugly cats', max: 1, key: YOUTUBE_API_KEY}, function(vid) {return vid;})
+import Search from '../../src/components/Search.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,24 +12,25 @@ class App extends React.Component {
       currVideoList: exampleVideoData
     };
     this.playVideo = this.playVideo.bind(this);
+    this.dynamicSearch = this.dynamicSearch.bind(this);
   }
 
   playVideo (title, video) {
-    // var videoIndex;
-    // videos.forEach(function(video, i) {
-    //   if (video.snippet.title === title) {
-    //     videoIndex = i;
-    //   }
-    // });
     this.setState({
       currVideoPlaying: video
     });
   }
 
+  dynamicSearch (search) {
+    this.props.searchYouTube({query: search, max: 5, key: YOUTUBE_API_KEY}, (videos) => {
+      this.setState({
+        currVideoPlaying: videos[0],
+        currVideoList: videos
+      });
+    });
+  }
+
   componentDidMount () {
-    // this.setState((state,props) => ({
-    //   currVideoPlaying: props.searchYouTube({query: 'ugly cats', max: 1, key: YOUTUBE_API_KEY}, function(vid) {return vid;})
-    // }));
     this.props.searchYouTube({query: 'ugly cats', max: 5, key: YOUTUBE_API_KEY}, (videos) => {
       this.setState({
         currVideoPlaying: videos[0],
@@ -45,7 +45,7 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>WHAT DO YOU WANT?</em></h5></div>
+            <div><h5><em>WHAT DO YOU WANT?</em><Search dynamicSearch={this.dynamicSearch}/></h5></div>
           </div>
         </nav>
         <div className="row">
