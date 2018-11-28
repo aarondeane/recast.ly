@@ -4,8 +4,11 @@ var searchYouTube = (options, callback) => {
   $.get("https://www.googleapis.com/youtube/v3/search", {
     maxResults : options.max,
     key : options.key,
-    q : options.query
-  }, function(data) {callback(data)});
+    q : options.query,
+    videoEmbeddable : true,
+    part : 'snippet',
+    type : 'video',
+  }, function(data) {callback(data.items)});
 };
 
 export default searchYouTube;
